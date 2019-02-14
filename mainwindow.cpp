@@ -3,129 +3,54 @@
 #include "ui_mainwindow.h"
 
 
+QString globPath = "D:\\document.json";
+QJsonDocument doc = GetDocFromFilename(globPath);
+CModel model(doc);
+
+void SetSettingsToTable(Ui::MainWindow *ui)
+{
+    ui->tableWidget->setColumnCount(2);
+    QTableWidgetItem *login = new QTableWidgetItem();
+    login->setText("Login");
+    ui->tableWidget->setHorizontalHeaderItem(0, login);
+    QTableWidgetItem *password = new QTableWidgetItem();
+    password->setText("Password");
+    ui->tableWidget->setHorizontalHeaderItem(1, password);
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableWidget->verticalHeader()->setVisible(false);
+    ui->QLineedit->selectAll();
+}
+
+void setAccountsToTable(Ui::MainWindow *ui)
+{
+    ui->listWidget->clear();
+    QJsonArray arrOfSites = model.GetArrayOfUrls();
+    for(int i =0; i<arrOfSites.size();i++)
+    {
+        ui->listWidget->addItem(arrOfSites[i].toString());
+    }
+
+
+}
+
+void SetModelToWidget(Ui::MainWindow *ui)
+{
+    ui->listWidget->clear();
+    ui->tableWidget->clear();
+    setAccountsToTable(ui);
+    //if(!model.GetArrayOfUrls().isEmpty())
+         //ui->listWidget->
+}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //connect(ui->pushButton, SIGNAL(clicked(bool)), )
-}
-
-
-QJsonDocument GetDocFromFile()
-
-{
-
-    QFile file;
-    QString globPath= QFileDialog::getOpenFileName(nullptr,"","D:\\Users\Root\Desktop\JsonBase","*.json");  // - чтобы спрашивать файл
-    // globPath = "D:\\Users\Root\Desktop\JsonBase.json"; //   D:\Users\Root\Desktop\JsonBase.json
-    file.setFileName(globPath);
-    QJsonDocument docc;
-    if ((file.exists())&&(file.open(QIODevice::ReadOnly|QFile::Text)))
-    {
-        QJsonParseError docError;
-        docc = QJsonDocument::fromJson(file.readAll(), &docError);
-        qWarning() << "file is read"   << endl;
-    }
-    file.close();
-    return docc;
-}
-
-
-
-
-QJsonArray GetAccounstArr(QJsonDocument &doc, QString url, QString type) //type means that it's site, not app or something
-{
-    // QString log = QJsonValue(doc.object().value("sites").toArray().at(0).toObject().value("accounts").toArray().at(0).toObject().value("Login")).toString();
-    int index = 0;
-    for(int i =0; i<doc.object().value(type).toArray().size(); i++)
-    {
-        if(doc.object().value("sites").toArray().at(i).toObject().value("url").toString() == url)
-            index = i;
-    }
-    return doc.object().value(type).toArray().at(index).toObject().value("accounts").toArray();
-}
-
-
-
-void SetAllLogAndPasToTable(QJsonDocument &doc, QString type, QTableWidget &widget)
-{
-    widget.setColumnCount(2);
-
-    QTableWidgetItem *login = new QTableWidgetItem();
-    login->setText("Login");
-    widget.setHorizontalHeaderItem(0, login);
-    QTableWidgetItem *password = new QTableWidgetItem();
-    password->setText("Password");
-    widget.setHorizontalHeaderItem(1, password);
-
-
-    QString login1;
-    QString password1;
-    for(int i = 0; i < doc.object().value(type).toArray().size(); i++)
-    {
-        for(int j = 0; j <doc.object().value(type).toArray().at(i).toObject().value("accounts").toArray().size(); j++)
-        {
-            widget.insertRow(j);
-            login1 = doc.object().value(type).toArray().at(i).toObject().value("accounts").toArray().at(j).toObject().value("Login").toString(); // aaaa1
-            password1 = doc.object().value(type).toArray().at(i).toObject().value("accounts").toArray().at(j).toObject().value("password").toString(); // ppppp
-            widget.setItem(j, 0, new QTableWidgetItem(login1));
-            widget.setItem(j, 1, new QTableWidgetItem(password1));
-        }
-    }
+    SetSettingsToTable(ui);
+    SetModelToWidget(ui);
 
 }
-
-
-void SetSiteLogAndPasToTable(QJsonDocument &doc, QString type, QTableWidget &widget, QString site)
-{
-    widget.setColumnCount(2);
-
-    QTableWidgetItem *login = new QTableWidgetItem();
-    login->setText("Login");
-    widget.setHorizontalHeaderItem(0, login);
-    QTableWidgetItem *password = new QTableWidgetItem();
-    password->setText("Password");
-    widget.setHorizontalHeaderItem(1, password);
-
-
-    QString login1;
-    QString password1;
-    for(int i = 0; i < doc.object().value(type).toArray().size(); i++)
-    {
-        for(int j = 0; j <doc.object().value(type).toArray().at(i).toObject().value("accounts").toArray().size(); j++)
-        {
-
-            if(doc.object().value(type).toArray().at(i).toObject().value("url").toString() == site)
-            {
-                widget.insertRow(j);
-                login1 = doc.object().value(type).toArray().at(i).toObject().value("accounts").toArray().at(j).toObject().value("Login").toString(); // aaaa1
-                password1 = doc.object().value(type).toArray().at(i).toObject().value("accounts").toArray().at(j).toObject().value("password").toString(); // ppppp
-                widget.setItem(j, 0, new QTableWidgetItem(login1));
-                widget.setItem(j, 1, new QTableWidgetItem(password1));
-            }
-        }
-    }
-
-}
-
-void AddSiteToDocument(QJsonDocument &doc, QJsonObject &site)
-{
-    QJsonObject acc;
-    acc.insert("Login", "yandexlogin");
-    acc.insert("password", "yandexPass");
-
-    QJsonArray ar;
-    ar.push_back(acc);
-
-    QJsonObject site_obj;                   // пробный объект-сайт который надо записать в док
-    site_obj.insert("url", "yandex.ru");
-    site_obj.insert("accounts", ar);
-
-    //записать в документ(надо сделать)
-}
-
 
 
 MainWindow::~MainWindow()
@@ -133,16 +58,89 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+
+void MainWindow::on_listWidget_pressed(const QModelIndex &index)
 {
-    doc = GetDocFromFile();
-    if(docError.errorString().toInt() == QJsonParseError::NoError)
+
+    //берем массив под индексом index "Vk.com": [ { "vkLogin": "PAssw1"},  { "vkLog2": "paasss2" }]
+    // берем в цикле по очереди объекты сайтов(аккаунты)
+    //для каждого аккаунта выводим логин и пароль
+    ui->tableWidget->setRowCount(0);
+    const int i = index.row();
+    QJsonArray accNumberI = model.GetAccountsOfSiteByIndex(i);
+
+    for(int i = 0; i< accNumberI.size(); i++)
     {
-        SetAllLogAndPasToTable(doc, "sites", *(ui->tableWidget_2));
-        //SetSiteLogAndPasToTable(doc, "sites", *(ui->tableWidget_2), "http://vk.ru");
+        ui->tableWidget->insertRow(0);
     }
 
-    ui->textBrowser->setText("AAAASAN");
+    for(int j = 0; j < accNumberI.size(); j++)
+        {
+
+             ui->tableWidget->setItem(j, 0, new QTableWidgetItem(accNumberI[j].toObject().keys().join("")));
+             ui->tableWidget->setItem(j, 1, new QTableWidgetItem(accNumberI[j].toObject().value(accNumberI[j].toObject().keys().join("")).toString()));
+        }
+
 
 }
 
+void MainWindow::on_QLineedit_returnPressed()
+{
+    if(ui->QLineedit->text() != "")
+    {
+        ui->listWidget->addItem(ui->QLineedit->text());   //это кинуть в модель и лист наш сайт и пустой массив акков
+        QJsonArray emptyJsonArr
+        {};
+       model.addSiteToModel(ui->QLineedit->text(), emptyJsonArr);
+       model.SaveModelToFile(model.GetDoc(), globPath);
+       ui->listWidget->setCurrentRow(ui->listWidget->count()-1);
+        ui->QLineedit->clear();
+   }
+}
+
+
+
+void MainWindow::on_ButtonDeleteSite_clicked()
+{
+    QList<QListWidgetItem*> items = ui->listWidget->selectedItems();
+    foreach(QListWidgetItem *item, items)
+    {
+        int index = ui->listWidget->row(item);
+        delete ui->listWidget->takeItem(index);
+        model.DeleteSiteByIndex(index);
+    }
+
+     model.SaveModelToFile(model.GetDoc(), globPath);
+}
+
+void MainWindow::on_ButtonAddSite_clicked()
+{
+    if(ui->QLineedit->text() != "")
+    {
+        ui->listWidget->addItem(ui->QLineedit->text());   //это кинуть в модель и лист наш сайт и пустой массив акков
+        QJsonArray emptyJsonArr
+        {};
+        model.addSiteToModel(ui->QLineedit->text(), emptyJsonArr);
+        model.SaveModelToFile(model.GetDoc(), globPath);
+        ui->listWidget->setCurrentRow(ui->listWidget->count()-1);
+        ui->QLineedit->clear();
+    }
+}
+
+
+
+
+void MainWindow::on_ButtonAddAcc_clicked()
+{
+    //только добавить в таблицу и встать туда, а потом отдельно уже переносить в таблицу
+    int a = ui->tableWidget->rowCount();
+    ui->tableWidget->insertRow(a);
+    a++;
+    ui->tableWidget->setItemSelected(ui->tableWidget->item(a-1,0), 1);
+
+}
+
+void MainWindow::on_tableWidget_itemChanged(QTableWidgetItem *item)
+{
+
+}
