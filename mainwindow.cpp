@@ -1,7 +1,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include "caddaccount.h"
 
 QString globPath = "D:\\document.json";
 QJsonDocument doc = GetDocFromFilename(globPath);
@@ -32,7 +32,6 @@ void setAccountsToTable(Ui::MainWindow *ui)
 
 
 }
-
 void SetModelToWidget(Ui::MainWindow *ui)
 {
     ui->listWidget->clear();
@@ -137,6 +136,27 @@ void MainWindow::on_ButtonAddAcc_clicked()
     ui->tableWidget->insertRow(a);
     a++;
     ui->tableWidget->setItemSelected(ui->tableWidget->item(a-1,0), 1);
+
+    int index=0;
+
+    QList<QListWidgetItem*> items = ui->listWidget->selectedItems();
+    foreach(QListWidgetItem *item, items)
+    {
+        index = ui->listWidget->row(item);
+        CAddAccount addWindow;//исправиить насчет памяти
+        addWindow.setModal(true);
+        addWindow.exec();
+        /*взять индекс выделеной
+        добавить в модели у сайта аккаунт
+        проверить рисуется ли
+        если нет то нарисовать
+        */
+        //ui->tableWidget->setItem(0,0, new QTableWidgetItem(addWindow.GetLogin()));
+
+    }
+
+
+
 
 }
 

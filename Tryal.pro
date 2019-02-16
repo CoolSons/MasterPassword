@@ -25,10 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    caddaccount.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    caddaccount.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    caddaccount.ui

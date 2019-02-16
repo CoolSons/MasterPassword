@@ -21,7 +21,7 @@
 #include <QDebug>
 #include <QTableWidget>
 #include <QListWidgetItem>
-
+#include "caddaccount.h"
 
 QJsonDocument GetDocFromFilename(QString &filename);
 QJsonDocument GetDocFromFile(QFile &file);
@@ -66,6 +66,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
 };
 
 
@@ -173,7 +174,36 @@ public:
 
     }
 
+    int GetIndexOfSiteByName(const QString &site)// было QString site и работало
+    {
+        for(int i = 0; i < mainDoc.object().value("array Of URLs").toArray().size(); i++)
+        {
+            if(site == mainDoc.object().value("array Of URLs").toArray().at(i).toObject().keys().at(0)) // не может ли быть ошибки?
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
 
+    void AddAccountToSite(const QString &site,const QString &login,const  QString &password)
+    {
+        QJsonArray arrOfAccsOfSite = GetAccountsOfSiteByIndex(GetIndexOfSiteByName(site));
+
+        QJsonObject obj, siteObj;
+        obj.insert(login, password);
+        arrOfAccsOfSite.push_back(obj);
+
+        QJsonArray demo = GetUrlsArr();
+        //demo = QJsonArray([{"Vk.com":[{"vkLogin1":"vkPas1"},{"vkLog2":"vkPas2"}]},{"ok.ru":[{"OKkogin1":"OKPASS1"},{"OKLog2":"OkLog2"}]},{"11111":[]},{"Write the Name/URL of the servise":[]},{"Write the Name/URL of the servise":[]}])
+        //demo[GetIndexOfSiteByName(site)]  = QJsonValue(object, QJsonObject({"Vk.com":[{"vkLogin1":"vkPas1"},{"vkLog2":"vkPas2"}]}))
+
+        //demo[GetIndexOfSiteByName(site)].toObject().value(site).toArray() = QJsonArray([{"vkLogin1":"vkPas1"},{"vkLog2":"vkPas2"}])
+        //arrOfAccsOfSite  = QJsonArray([{"vkLogin1":"vkPas1"},{"vkLog2":"vkPas2"},{"aaaaaa":"bBbbb"}])
+        siteObj.insert(this->GetArrayOfUrls()[GetIndexOfSiteByName(site)].toString(), arrOfAccsOfSite);
+        demo[GetIndexOfSiteByName(site)] = siteObj;
+
+    }
 
     QString GetLogin(const QJsonObject &account)
     {
