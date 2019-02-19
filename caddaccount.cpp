@@ -18,6 +18,6 @@ void CAddAccount::on_buttonBox_clicked(QAbstractButton *button) // правил�
 {
     login = ui->label->text();
     password = ui->label_2->text();
-    qWarning() << CModel::GetModel()->GetStr();
+    qWarning() << CModel::GetModel()->GetDoc();
    }
 

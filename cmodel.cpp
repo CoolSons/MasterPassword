@@ -103,7 +103,3 @@ int CModel::GetIndexOfSiteByName(const QString &site)// было QString site и
     return 0;
 }
 
-CModel::CModel()
-{
-
-}

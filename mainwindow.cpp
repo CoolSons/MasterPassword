@@ -3,9 +3,8 @@
 #include "ui_mainwindow.h"
 #include "caddaccount.h"
 #include "cmodel.h"
-QString globPath = "D:\\document.json";
-QJsonDocument doc = GetDocFromFilename(globPath);
-static CModel model(doc);
+
+CModel *model = CModel::GetModel();
 
 void SetSettingsToTable(Ui::MainWindow *ui)
 {
@@ -24,7 +23,7 @@ void SetSettingsToTable(Ui::MainWindow *ui)
 void setAccountsToTable(Ui::MainWindow *ui)
 {
     ui->listWidget->clear();
-    QJsonArray arrOfSites = model.GetArrayOfUrls();
+    QJsonArray arrOfSites = model->GetArrayOfUrls();
     for(int i =0; i<arrOfSites.size();i++)
     {
         ui->listWidget->addItem(arrOfSites[i].toString());
@@ -37,7 +36,7 @@ void SetModelToWidget(Ui::MainWindow *ui)
     ui->listWidget->clear();
     ui->tableWidget->clear();
     setAccountsToTable(ui);
-    //if(!model.GetArrayOfUrls().isEmpty())
+    //if(!model->GetArrayOfUrls().isEmpty())
          //ui->listWidget->
 }
 
@@ -66,7 +65,7 @@ void MainWindow::on_listWidget_pressed(const QModelIndex &index)
     //для каждого аккаунта выводим логин и пароль
     ui->tableWidget->setRowCount(0);
     const int i = index.row();
-    QJsonArray accNumberI = model.GetAccountsOfSiteByIndex(i);
+    QJsonArray accNumberI = model->GetAccountsOfSiteByIndex(i);
 
     for(int i = 0; i< accNumberI.size(); i++)
     {
@@ -90,8 +89,8 @@ void MainWindow::on_QLineedit_returnPressed()
         ui->listWidget->addItem(ui->QLineedit->text());   //это кинуть в модель и лист наш сайт и пустой массив акков
         QJsonArray emptyJsonArr
         {};
-       model.addSiteToModel(ui->QLineedit->text(), emptyJsonArr);
-       model.SaveModelToFile(model.GetDoc(), globPath);
+       model->addSiteToModel(ui->QLineedit->text(), emptyJsonArr);
+       model->SaveModelToFile(model->GetDoc(), model->globPath);
        ui->listWidget->setCurrentRow(ui->listWidget->count()-1);
         ui->QLineedit->clear();
    }
@@ -106,10 +105,10 @@ void MainWindow::on_ButtonDeleteSite_clicked()
     {
         int index = ui->listWidget->row(item);
         delete ui->listWidget->takeItem(index);
-        model.DeleteSiteByIndex(index);
+        model->DeleteSiteByIndex(index);
     }
 
-     model.SaveModelToFile(model.GetDoc(), globPath);
+     model->SaveModelToFile(model->GetDoc(), model->globPath);
 }
 
 void MainWindow::on_ButtonAddSite_clicked()
@@ -119,8 +118,8 @@ void MainWindow::on_ButtonAddSite_clicked()
         ui->listWidget->addItem(ui->QLineedit->text());   //это кинуть в модель и лист наш сайт и пустой массив акков
         QJsonArray emptyJsonArr
         {};
-        model.addSiteToModel(ui->QLineedit->text(), emptyJsonArr);
-        model.SaveModelToFile(model.GetDoc(), globPath);
+        model->addSiteToModel(ui->QLineedit->text(), emptyJsonArr);
+        model->SaveModelToFile(model->GetDoc(), model->globPath);
         ui->listWidget->setCurrentRow(ui->listWidget->count()-1);
         ui->QLineedit->clear();
     }

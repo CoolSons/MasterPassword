@@ -11,9 +11,10 @@ private:
     QJsonObject mainObject;
     QJsonDocument mainDoc;
     QString mainString;
+
     static CModel *model;
 public:
-
+QString globPath = "D:\\document.json";
     void SetObj(const QJsonObject &aaaa)
     {
         mainObject = aaaa;
@@ -97,7 +98,15 @@ public:
 
 
 
-    CModel();
+    CModel()
+    {
+        QJsonDocument doc = GetDocFromFilename(globPath);
+        SetDoc(doc);
+        QJsonObject obj = DocumentToObject(doc);
+        SetObj(obj);
+        QString s = DocumentToString(doc);
+        SetStr(s);
+    }
     CModel(const QJsonObject &obj)
     {
         SetObj(obj);
