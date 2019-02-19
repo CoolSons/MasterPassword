@@ -1,7 +1,7 @@
 #include "caddaccount.h"
 #include "ui_caddaccount.h"
-#include <QDebug>                           //Это норма?
-#include "mainwindow.h"
+#include <QDebug>
+#include "cmodel.h"
 CAddAccount::CAddAccount(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CAddAccount)
@@ -18,6 +18,6 @@ void CAddAccount::on_buttonBox_clicked(QAbstractButton *button) // правил�
 {
     login = ui->label->text();
     password = ui->label_2->text();
-
+    qWarning() << CModel::GetModel()->GetStr();
    }
 

@@ -2,10 +2,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "caddaccount.h"
-
+#include "cmodel.h"
 QString globPath = "D:\\document.json";
 QJsonDocument doc = GetDocFromFilename(globPath);
-CModel model(doc);
+static CModel model(doc);
 
 void SetSettingsToTable(Ui::MainWindow *ui)
 {

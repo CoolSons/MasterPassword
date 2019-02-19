@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    caddaccount.cpp
+    caddaccount.cpp \
+    cmodel.cpp
 
 HEADERS += \
         mainwindow.h \
-    caddaccount.h
+    caddaccount.h \
+    cmodel.h
 
 FORMS += \
         mainwindow.ui \

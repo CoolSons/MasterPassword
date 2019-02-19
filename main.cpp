@@ -2,7 +2,6 @@
 #include <QApplication>
 #include <QErrorMessage>
 
-
 QJsonDocument GetDocFromFilename(QString &filename)
 {
 
