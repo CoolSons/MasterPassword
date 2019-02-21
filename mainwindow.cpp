@@ -1,4 +1,4 @@
-
+//Set methods as Mainwindowsed
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "caddaccount.h"
@@ -29,10 +29,29 @@ void setAccountsToListWidget(Ui::MainWindow *ui)
         ui->listWidget->addItem(arrOfSites[i].toString());
     }
 }
-void setAccountsToTableWidget(Ui::MainWindow *ui)
-{
 
+
+void setAccountsToTableWidget(Ui::MainWindow *ui, const int index)
+{
+    ui->tableWidget->setRowCount(0);
+    const int i = index;
+    QJsonArray accNumberI = model->GetAccountsOfSiteByIndex(i);
+    qWarning() << accNumberI;
+    for(int i = 0; i< accNumberI.size(); i++)
+    {
+        ui->tableWidget->insertRow(0);
+    }
+
+    for(int j = 0; j < accNumberI.size(); j++)
+        {
+
+             ui->tableWidget->setItem(j, 0, new QTableWidgetItem(accNumberI[j].toObject().keys().join("")));
+             ui->tableWidget->setItem(j, 1, new QTableWidgetItem(accNumberI[j].toObject().value(accNumberI[j].toObject().keys().join("")).toString()));
+        }
 }
+
+
+
 void SetModelToWidget(Ui::MainWindow *ui)
 {
     ui->listWidget->clear();
@@ -152,6 +171,8 @@ void MainWindow::on_ButtonAddAcc_clicked()
 
         model->SaveModelToFile(model->GetDoc(), model->globPath);
 
+        setAccountsToTableWidget(ui, index);
+
         /*взять индекс выделеной
         добавить в модели у сайта аккаунт
         проверить рисуется ли
@@ -174,3 +195,9 @@ void MainWindow::on_tableWidget_itemChanged(QTableWidgetItem *item)
 {
 
 }
+
+void MainWindow::on_ButtonDeleteAcc_clicked()
+{
+
+}
+
