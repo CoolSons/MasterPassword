@@ -2,9 +2,8 @@
 #include "ui_caddaccount.h"
 #include <QDebug>
 #include "cmodel.h"
-CAddAccount::CAddAccount(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::CAddAccount)
+MainWindow *mainwindow = MainWindow::GetMainWindow();
+CAddAccount::CAddAccount(QWidget *parent) : QDialog(parent),   ui(new Ui::CAddAccount)
 {
     ui->setupUi(this);
 }
@@ -16,8 +15,8 @@ CAddAccount::~CAddAccount()
 
 void CAddAccount::on_buttonBox_clicked(QAbstractButton *button) // правильно что через новую модель?
 {
-    login = ui->label->text();
-    password = ui->label_2->text();
-    qWarning() << CModel::GetModel()->GetDoc();
+    //CModel::GetModel()->AddAccountToSite(,ui->label->text(),ui->label_2->text() );
+
+    //qWarning() << CModel::GetModel()->GetDoc();
    }
 

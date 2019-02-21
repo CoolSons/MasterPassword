@@ -35,9 +35,6 @@ QString DocumentToString(const QJsonDocument &_jsObj);
 QJsonObject DocumentToObject(const QJsonDocument &doc);
 QJsonDocument ObjectToDocument(const QJsonObject& obj);
 
-namespace Ui {
-class MainWindow;
-}
 
 
 
@@ -47,9 +44,18 @@ class MainWindow : public QMainWindow
     QJsonDocument   doc;
     QJsonArray arr;
     QJsonParseError  docError;
+    static MainWindow *ui;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+
+
+    static  MainWindow *GetMainWindow() //returns this model |
+    {
+       // qWarning() << mainWindow->isActiveWindow();
+//          mainWindow = new MainWindow();
+//        return mainWindow;
+    }
     ~MainWindow();
 
 private slots:
@@ -67,7 +73,8 @@ private slots:
     void on_tableWidget_itemChanged(QTableWidgetItem *item);
 
 private:
-    Ui::MainWindow *ui;
+    //MainWindow *ui;
+    //static Ui::MainWindow *mainWindow;
 
 };
 

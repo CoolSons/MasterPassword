@@ -11,10 +11,17 @@ private:
     QJsonObject mainObject;
     QJsonDocument mainDoc;
     QString mainString;
-
     static CModel *model;
+
 public:
 QString globPath = "D:\\document.json";
+
+    static  CModel *GetModel() //returns this model |
+    {
+        if(!model)
+            model = new CModel();
+        return model;
+    }
     void SetObj(const QJsonObject &aaaa)
     {
         mainObject = aaaa;
@@ -64,12 +71,7 @@ QString globPath = "D:\\document.json";
         this->SetDoc(mod.GetDoc());
     }
 
-    static  CModel *GetModel() //returns this model |
-    {
-        if(!model)
-            model = new CModel();
-        return model;
-    }
+
 
     const QJsonArray GetUrlsArr()
      {

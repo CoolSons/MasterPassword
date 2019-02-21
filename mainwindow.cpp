@@ -3,7 +3,7 @@
 #include "ui_mainwindow.h"
 #include "caddaccount.h"
 #include "cmodel.h"
-
+MainWindow* MainWindow::ui= 0;
 CModel *model = CModel::GetModel();
 
 void SetSettingsToTable(Ui::MainWindow *ui)
@@ -33,16 +33,15 @@ void setAccountsToTable(Ui::MainWindow *ui)
 }
 void SetModelToWidget(Ui::MainWindow *ui)
 {
-    ui->listWidget->clear();
-    ui->tableWidget->clear();
+    //ui->listWidget->clear();
+    //ui->tableWidget->clear();
     setAccountsToTable(ui);
     //if(!model->GetArrayOfUrls().isEmpty())
          //ui->listWidget->
 }
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    QMainWindow(parent)
 {
     ui->setupUi(this);
     SetSettingsToTable(ui);
