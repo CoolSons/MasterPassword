@@ -8,7 +8,6 @@
 #include <QListWidgetItem>
 #include "cmodel.h"
 CModel* CModel::model = 0;
-
    QJsonArray CModel::GetArrayOfUrls() //returns ("Vk.com"), ("ok.ru")... |
 {
     QStringList list = {};

@@ -3,7 +3,9 @@
 
 #include <QDialog>
 #include <QAbstractButton>
-
+namespace Ui {
+class CAddAccount;
+}
 
 class CAddAccount : public QDialog
 {
@@ -12,15 +14,24 @@ class CAddAccount : public QDialog
 public:
     explicit CAddAccount(QWidget *parent = 0);
 
+    QString GetLogin()
+    {
+        return login;
+    }
 
+    QString GetPassword()
+    {
+        return password;
+    }
     ~CAddAccount();
 
 private slots:
     void on_buttonBox_clicked(QAbstractButton *button);
 
 private:
-    CAddAccount *ui;
-
+    Ui::CAddAccount *ui;
+    QString login;
+    QString password;
 };
 
 
