@@ -20,20 +20,24 @@ CModel* CModel::model = 0;
 
 void CModel::AddAccountToSite(const QString &site,const QString &login,const  QString &password)
 {
-    QJsonArray arrOfAccsOfSite = GetAccountsOfSiteByIndex(GetIndexOfSiteByName(site));
-
-    QJsonObject obj, siteObj;
+    QJsonArray arrOfAccsOfSite = GetAccountsOfSiteByIndex(GetIndexOfSiteByName(site));//ok
+    QJsonObject obj, siteObj, result;
     obj.insert(login, password);
-    arrOfAccsOfSite.push_back(obj);
+    arrOfAccsOfSite.push_back(obj);//ok
 
     QJsonArray demo = GetUrlsArr();
+
     //demo = QJsonArray([{"Vk.com":[{"vkLogin1":"vkPas1"},{"vkLog2":"vkPas2"}]},{"ok.ru":[{"OKkogin1":"OKPASS1"},{"OKLog2":"OkLog2"}]},{"11111":[]},{"Write the Name/URL of the servise":[]},{"Write the Name/URL of the servise":[]}])
     //demo[GetIndexOfSiteByName(site)]  = QJsonValue(object, QJsonObject({"Vk.com":[{"vkLogin1":"vkPas1"},{"vkLog2":"vkPas2"}]}))
 
     //demo[GetIndexOfSiteByName(site)].toObject().value(site).toArray() = QJsonArray([{"vkLogin1":"vkPas1"},{"vkLog2":"vkPas2"}])
     //arrOfAccsOfSite  = QJsonArray([{"vkLogin1":"vkPas1"},{"vkLog2":"vkPas2"},{"aaaaaa":"bBbbb"}])
-    siteObj.insert(this->GetArrayOfUrls()[GetIndexOfSiteByName(site)].toString(), arrOfAccsOfSite);
-    demo[GetIndexOfSiteByName(site)] = siteObj;
+    siteObj.insert(this->GetArrayOfUrls()[GetIndexOfSiteByName(site)].toString(), arrOfAccsOfSite);//QJsonObject({"11111":[{"Set Login":"Set Password\n"}]})
+    demo[GetIndexOfSiteByName(site)] = siteObj;//[{"Vk.com":[{"vkLogin1":"vkPas1"},{"vkLog2":"vkPas2"}]},{"ok.ru":[{"OKkogin1":"OKPASS1"},{"OKLog2":"OkLog2"}]},{"11111":[]},{"Write the Name/URL of the servise
+    result.keys() = model->GetObj().keys();
+    result.toVariantMap();
+    result["array Of URLs"] = demo;
+    model->SetModel(result);
 
 }
 

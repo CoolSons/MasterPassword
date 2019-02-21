@@ -14,15 +14,8 @@ class CAddAccount : public QDialog
 public:
     explicit CAddAccount(QWidget *parent = 0);
 
-    QString GetLogin()
-    {
-        return login;
-    }
-
-    QString GetPassword()
-    {
-        return password;
-    }
+    QString login();
+    QString password();
     ~CAddAccount();
 
 private slots:
@@ -30,8 +23,7 @@ private slots:
 
 private:
     Ui::CAddAccount *ui;
-    QString login;
-    QString password;
+
 };
 
 

@@ -20,7 +20,7 @@ void SetSettingsToTable(Ui::MainWindow *ui)
     ui->QLineedit->selectAll();
 }
 
-void setAccountsToTable(Ui::MainWindow *ui)
+void setAccountsToListWidget(Ui::MainWindow *ui)
 {
     ui->listWidget->clear();
     QJsonArray arrOfSites = model->GetArrayOfUrls();
@@ -28,14 +28,16 @@ void setAccountsToTable(Ui::MainWindow *ui)
     {
         ui->listWidget->addItem(arrOfSites[i].toString());
     }
-
+}
+void setAccountsToTableWidget(Ui::MainWindow *ui)
+{
 
 }
 void SetModelToWidget(Ui::MainWindow *ui)
 {
     ui->listWidget->clear();
     ui->tableWidget->clear();
-    setAccountsToTable(ui);
+    setAccountsToListWidget(ui);
     //if(!model->GetArrayOfUrls().isEmpty())
          //ui->listWidget->
 }
@@ -145,12 +147,21 @@ void MainWindow::on_ButtonAddAcc_clicked()
         CAddAccount addWindow;//исправиить насчет памяти
         addWindow.setModal(true);
         addWindow.exec();
+
+        model->AddAccountToSite(model->GetArrayOfUrls()[index].toString(), addWindow.login(), addWindow.password());
+
+        model->SaveModelToFile(model->GetDoc(), model->globPath);
+
         /*взять индекс выделеной
         добавить в модели у сайта аккаунт
         проверить рисуется ли
         если нет то нарисовать
         */
         //ui->tableWidget->setItem(0,0, new QTableWidgetItem(addWindow.GetLogin()));
+
+
+
+        //далее из on_listWidget_pressed
 
     }
 
