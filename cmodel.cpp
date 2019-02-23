@@ -18,6 +18,34 @@ CModel* CModel::model = 0;
     return QJsonArray::fromStringList(list);
 }
 
+   void CModel::DeleteAccountOfSite(const QString &site, const int index)
+{
+       QJsonArray arrOfChangedSite = GetAccountsOfSiteByIndex(GetIndexOfSiteByName(site));//QJsonArray([{"OKkogin1":"OKPASS1"},{"OKLog2":"OkLog2"},{"Set Login":"Set Password\n"}])
+
+       QJsonObject objOfChangedSite;       //QJsonObject({"Vk.com":[{"vkLogin1":"vkPas1"},{"vkLog2":"vkPas2"}]})
+       QJsonArray arrOfAllAccsWithChanges;
+       arrOfChangedSite.removeAt(index);
+       objOfChangedSite = model->GetObj()["array Of URLs"].toArray().at(GetIndexOfSiteByName(site)).toObject();//QJsonObject({"Vk.com":[{"vkLogin1":"vkPas1"},{"vkLog2":"vkPas2"}]})
+       objOfChangedSite.toVariantMap();
+       objOfChangedSite[model->GetArrayOfUrls()[GetIndexOfSiteByName(site)].toString()] = arrOfChangedSite;
+       QJsonObject iSite ;
+        for(int i = 0; i< model->GetArrayOfUrls().size(); i++)
+        {
+            if(i != model->GetIndexOfSiteByName(site))
+                iSite = model->GetUrlsArr()[i].toObject();
+            else
+                iSite = objOfChangedSite;
+
+            arrOfAllAccsWithChanges.append(iSite);
+        }
+        QJsonObject result;
+        result.toVariantMap();
+        result["array Of URLs"] = arrOfAllAccsWithChanges;
+        model->SetModel(result);
+        model->SaveModelToFile(model->GetDoc(), model->globPath);
+//        qWarning() <<  model->GetDoc();
+}
+
 void CModel::AddAccountToSite(const QString &site,const QString &login,const  QString &password)
 {
     QJsonArray arrOfAccsOfSite = GetAccountsOfSiteByIndex(GetIndexOfSiteByName(site));//ok
@@ -54,6 +82,7 @@ void CModel::AddAccountToSite(const QString &site,const QString &login,const  QS
       this->SetModel(main);
     }
 }
+
 void CModel::addSiteToModel(const QString &url, const QJsonArray &arrOfAccounts)//Переделатть с копией МОДЕЛИ
  {
      QJsonObject site;

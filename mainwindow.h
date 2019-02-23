@@ -70,6 +70,8 @@ private slots:
 
 
 
+    void on_tableWidget_clicked(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
 

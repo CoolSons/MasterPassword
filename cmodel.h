@@ -92,8 +92,10 @@ QString globPath = "D:\\document.json";
 
     int GetIndexOfSiteByName(const QString &site);// было QString site и работало
     void AddAccountToSite(const QString &site,const QString &login,const  QString &password);
+    void DeleteAccountOfSite(const QString &site, const int index);
     void DeleteSiteByIndex(const int i);
     void addSiteToModel(const QString &url, const QJsonArray &arrOfAccounts);//Переделатть с копией МОДЕЛИ
+
     void SaveModelToFile(const QJsonDocument &document, const QString &fileName);//сделать абстрактные функции
 
 

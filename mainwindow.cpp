@@ -31,7 +31,7 @@ void setAccountsToListWidget(Ui::MainWindow *ui)
 }
 
 
-void setAccountsToTableWidget(Ui::MainWindow *ui, const int index)
+void setSiteToTableWidget(Ui::MainWindow *ui, const int index)
 {
     ui->tableWidget->setRowCount(0);
     const int i = index;
@@ -171,7 +171,7 @@ void MainWindow::on_ButtonAddAcc_clicked()
 
         model->SaveModelToFile(model->GetDoc(), model->globPath);
 
-        setAccountsToTableWidget(ui, index);
+        setSiteToTableWidget(ui, index);
 
         /*взять индекс выделеной
         добавить в модели у сайта аккаунт
@@ -198,6 +198,29 @@ void MainWindow::on_tableWidget_itemChanged(QTableWidgetItem *item)
 
 void MainWindow::on_ButtonDeleteAcc_clicked()
 {
+    int tableIndex = 0;
+    int listIndex = 0;
+    QList<QTableWidgetItem*> items = ui->tableWidget->selectedItems();
+    foreach(QTableWidgetItem *item, items)
+    {
+       tableIndex = ui->tableWidget->row(item);
 
+    }
+
+    QList<QListWidgetItem*> items2 = ui->listWidget->selectedItems();
+    foreach(QListWidgetItem *item, items2)
+    {
+        listIndex = ui->listWidget->row(item);
+    }
+    //qWarning() << model->GetArrayOfUrls()[listIndex].toString() << tableIndex; параметры окей
+    if(!items.empty())
+        model->DeleteAccountOfSite(model->GetArrayOfUrls()[listIndex].toString(), tableIndex);
+    //setSiteToTableWidget(ui, );
 }
 
+
+void MainWindow::on_tableWidget_clicked(const QModelIndex &index)
+{
+    ui->tableWidget->selectRow(index.row());
+
+}
