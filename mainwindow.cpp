@@ -33,10 +33,11 @@ void setAccountsToListWidget(Ui::MainWindow *ui)
 
 void setSiteToTableWidget(Ui::MainWindow *ui, const int index)
 {
+    ui->tableWidget->clear();
     ui->tableWidget->setRowCount(0);
-    const int i = index;
-    QJsonArray accNumberI = model->GetAccountsOfSiteByIndex(i);
-    qWarning() << accNumberI;
+
+    QJsonArray accNumberI = model->GetAccountsOfSiteByIndex(index);
+
     for(int i = 0; i< accNumberI.size(); i++)
     {
         ui->tableWidget->insertRow(0);
@@ -44,10 +45,10 @@ void setSiteToTableWidget(Ui::MainWindow *ui, const int index)
 
     for(int j = 0; j < accNumberI.size(); j++)
         {
-
              ui->tableWidget->setItem(j, 0, new QTableWidgetItem(accNumberI[j].toObject().keys().join("")));
              ui->tableWidget->setItem(j, 1, new QTableWidgetItem(accNumberI[j].toObject().value(accNumberI[j].toObject().keys().join("")).toString()));
         }
+
 }
 
 
@@ -84,6 +85,7 @@ void MainWindow::on_listWidget_pressed(const QModelIndex &index)
     //берем массив под индексом index "Vk.com": [ { "vkLogin": "PAssw1"},  { "vkLog2": "paasss2" }]
     // берем в цикле по очереди объекты сайтов(аккаунты)
     //для каждого аккаунта выводим логин и пароль
+
     ui->tableWidget->setRowCount(0);
     const int i = index.row();
     QJsonArray accNumberI = model->GetAccountsOfSiteByIndex(i);
@@ -212,10 +214,12 @@ void MainWindow::on_ButtonDeleteAcc_clicked()
     {
         listIndex = ui->listWidget->row(item);
     }
-    //qWarning() << model->GetArrayOfUrls()[listIndex].toString() << tableIndex; параметры окей
+   // qWarning() << listIndex << tableIndex; //параметры окей
+
     if(!items.empty())
         model->DeleteAccountOfSite(model->GetArrayOfUrls()[listIndex].toString(), tableIndex);
-    //setSiteToTableWidget(ui, );
+
+    setSiteToTableWidget(ui, listIndex);
 }
 
 
