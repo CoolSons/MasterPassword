@@ -151,7 +151,7 @@ void MainWindow::on_ButtonAddSite_clicked()
 
 
 
-void MainWindow::on_ButtonAddAcc_clicked()
+void MainWindow::on_ButtonAddAcc_clicked()//это должно быть на ОК а не на add,
 {
     //только добавить в таблицу и встать туда, а потом отдельно уже переносить в таблицу
     int a = ui->tableWidget->rowCount();
@@ -161,31 +161,17 @@ void MainWindow::on_ButtonAddAcc_clicked()
 
     int index=0;
 
+    CAddAccount addWindow;
     QList<QListWidgetItem*> items = ui->listWidget->selectedItems();
     foreach(QListWidgetItem *item, items)
     {
         index = ui->listWidget->row(item);
-        CAddAccount addWindow;//исправиить насчет памяти
+        //исправиить насчет памяти
         addWindow.setModal(true);
         addWindow.exec();
-
         model->AddAccountToSite(model->GetArrayOfUrls()[index].toString(), addWindow.login(), addWindow.password());
-
         model->SaveModelToFile(model->GetDoc(), model->globPath);
-
         setSiteToTableWidget(ui, index);
-
-        /*взять индекс выделеной
-        добавить в модели у сайта аккаунт
-        проверить рисуется ли
-        если нет то нарисовать
-        */
-        //ui->tableWidget->setItem(0,0, new QTableWidgetItem(addWindow.GetLogin()));
-
-
-
-        //далее из on_listWidget_pressed
-
     }
 
 

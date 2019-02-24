@@ -96,8 +96,7 @@ QString globPath = "D:\\document.json";
     void DeleteSiteByIndex(const int i);
     void addSiteToModel(const QString &url, const QJsonArray &arrOfAccounts);//Переделатть с копией МОДЕЛИ
 
-    void SaveModelToFile(const QJsonDocument &document, const QString &fileName);//сделать абстрактные функции
-
+    void SaveModelToFile(const QJsonDocument &document, const QString &fileName);
 
 
     CModel()

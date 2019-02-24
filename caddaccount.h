@@ -16,6 +16,8 @@ public:
 
     QString login();
     QString password();
+
+
     ~CAddAccount();
 
 private slots:

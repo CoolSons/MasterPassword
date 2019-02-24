@@ -31,3 +31,6 @@ QString CAddAccount::password()
    return ui->textEdit_2->toPlainText();
 }
 
+
+
+
