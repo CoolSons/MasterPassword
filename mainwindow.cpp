@@ -22,12 +22,15 @@ void SetSettingsToTable(Ui::MainWindow *ui)
 
 void setAccountsToListWidget(Ui::MainWindow *ui)
 {
+
     ui->listWidget->clear();
     QJsonArray arrOfSites = model->GetArrayOfUrls();
-    for(int i =0; i<arrOfSites.size();i++)
+
+    for(int i =0; i < arrOfSites.size();i++)
     {
         ui->listWidget->addItem(arrOfSites[i].toString());
     }
+
 }
 
 
@@ -214,3 +217,25 @@ void MainWindow::on_tableWidget_clicked(const QModelIndex &index)
     ui->tableWidget->selectRow(index.row());
 
 }
+
+
+
+void MainWindow::on_listWidget_itemSelectionChanged()
+{
+    int listIndex = 0;
+    QList<QListWidgetItem*> items2 = ui->listWidget->selectedItems();
+    foreach(QListWidgetItem *item, items2)
+    {
+        listIndex = ui->listWidget->row(item);
+    }
+    setSiteToTableWidget(ui, listIndex);
+}
+
+
+
+
+
+
+
+
+

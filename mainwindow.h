@@ -68,9 +68,9 @@ private slots:
 
     void on_ButtonDeleteAcc_clicked();
 
-
-
     void on_tableWidget_clicked(const QModelIndex &index);
+
+    void on_listWidget_itemSelectionChanged();
 
 private:
     Ui::MainWindow *ui;
