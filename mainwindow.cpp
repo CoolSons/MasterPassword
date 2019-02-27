@@ -182,7 +182,7 @@
             //исправиить насчет памяти
             addWindow.setModal(true);
             addWindow.exec();
-            if(addWindow.OkClicked == 1)
+            if(addWindow.OkClicked == 1 && addWindow.login() !="" && addWindow.password() != "")
             {
                 int a = ui->tableWidget->rowCount();
                 ui->tableWidget->insertRow(a);
