@@ -16,7 +16,7 @@ public:
 
     QString login();
     QString password();
-
+    bool OkClicked = false;
 
     ~CAddAccount();
 

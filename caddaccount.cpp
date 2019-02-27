@@ -16,9 +16,16 @@ CAddAccount::~CAddAccount()
 
 void CAddAccount::on_buttonBox_clicked(QAbstractButton *button) // правильно что через новую модель?
 {
-   // login = ui->label->text();
-   // password = ui->label_2->text();
-   // qWarning() << CModel::GetModel()->GetDoc();
+
+    if( button->text() == "OK")//"Cancel" "OK"
+    {
+        OkClicked = true;
+    }
+    else
+    {
+        OkClicked = false;
+    }
+
 }
 
 QString CAddAccount::login()
@@ -30,6 +37,7 @@ QString CAddAccount::password()
 {
    return ui->textEdit_2->toPlainText();
 }
+
 
 
 
