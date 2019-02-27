@@ -126,6 +126,7 @@
 
     void MainWindow::on_ButtonDeleteSite_clicked()
     {
+
         QList<QListWidgetItem*> items = ui->listWidget->selectedItems();
         foreach(QListWidgetItem *item, items)
         {
@@ -135,6 +136,9 @@
         }
 
          model->SaveModelToFile(model->GetDoc(), model->globPath);
+        if(ui->listWidget->count() == 0)
+        {ui->tableWidget->clear();
+        ui->tableWidget->setRowCount(0);}
     }
 
     void MainWindow::on_ButtonAddSite_clicked()
@@ -199,10 +203,6 @@
 
     }
 
-    void MainWindow::on_tableWidget_itemChanged(QTableWidgetItem *item)
-    {
-
-    }
 
     void MainWindow::on_ButtonDeleteAcc_clicked()
     {
@@ -247,6 +247,7 @@
         }
         setSiteToTableWidget(ui, listIndex);
     }
+
 
 
 

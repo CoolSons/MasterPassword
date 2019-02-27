@@ -64,13 +64,13 @@ private slots:
 
     void on_ButtonAddAcc_clicked();
 
-    void on_tableWidget_itemChanged(QTableWidgetItem *item);
-
     void on_ButtonDeleteAcc_clicked();
 
     void on_tableWidget_clicked(const QModelIndex &index);
 
     void on_listWidget_itemSelectionChanged();
+
+
 
 private:
     Ui::MainWindow *ui;
