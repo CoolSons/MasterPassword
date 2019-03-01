@@ -7,6 +7,9 @@ CAddAccount::CAddAccount(QWidget *parent) :
     ui(new Ui::CAddAccount)
 {
     ui->setupUi(this);
+    ui->textEdit->setFocus();
+    ui->textEdit->selectAll();
+
 }
 
 CAddAccount::~CAddAccount()

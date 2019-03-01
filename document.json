@@ -1,0 +1,62 @@
+{
+    "array Of URLs": [
+        {
+            "Vk.com": [
+                {
+                    "vkLogin1": "vkPas1"
+                },
+                {
+                    "vkLog2": "vkPas2"
+                }
+            ]
+        },
+        {
+            "ok.ru": [
+                {
+                    "OKkogin1": "OKPASS1"
+                },
+                {
+                    "OKLog2": "OkLog2"
+                },
+                {
+                    "ok3": "ok4"
+                }
+            ]
+        },
+        {
+            "2222222": [
+                {
+                    "Set Login1": "Set Password1\n"
+                },
+                {
+                    "Set Login222": "Set Password\n"
+                }
+            ]
+        },
+        {
+            "Write the Name/URL of the servise": [
+                {
+                    "Set Login": "Set Password\n"
+                },
+                {
+                    "Set Login": "Set Password\n"
+                },
+                {
+                    "Set Login": "Set Password\n"
+                },
+                {
+                    "Set Login": "Set Password\n"
+                }
+            ]
+        },
+        {
+            "Set correct site please": [
+                {
+                    "Set Login": "Set Password\n"
+                }
+            ]
+        }
+    ]
+}
+
+	
