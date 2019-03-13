@@ -55,7 +55,23 @@
     }
 
 
+    void ShowMP(Ui::MainWindow *ui)
+    {
+        ui->centralWidget->hide();
+        ui->ButtonAddAcc->hide();
+        ui->ButtonAddSite->hide();
+        ui->ButtonDeleteAcc->hide();
+        ui->ButtonDeleteSite->hide();
+        ui->centralWidget->hide();
+        ui->horizontalLayoutWidget_3->hide();
+        ui->listWidget->hide();
+        ui->mainToolBar->hide();
+        ui->QLineedit->hide();
+        ui->statusBar->hide();
+        ui->tableWidget->hide();
+        ui->centralWidget->setVisible(false);
 
+    }
     void SetModelToWidget(Ui::MainWindow *ui)
     {
         ui->listWidget->clear();
@@ -167,6 +183,7 @@
             ui->QLineedit->setText("Set correct site please");
                ui->QLineedit->selectAll();
         }
+
     }
 
 

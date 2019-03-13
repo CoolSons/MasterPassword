@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "stacker.h"
 #include <QApplication>
 #include <QErrorMessage>
 
@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
 
 
     QApplication a(argc, argv);
-    MainWindow w;
+    stacker w;
 
     w.show();
 

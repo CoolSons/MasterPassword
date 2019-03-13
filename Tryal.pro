@@ -27,13 +27,19 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     caddaccount.cpp \
-    cmodel.cpp
+    cmodel.cpp \
+    stacker.cpp \
+    masspass.cpp
 
 HEADERS += \
         mainwindow.h \
     caddaccount.h \
-    cmodel.h
+    cmodel.h \
+    stacker.h \
+    masspass.h
 
 FORMS += \
         mainwindow.ui \
-    caddaccount.ui
+    caddaccount.ui \
+    stacker.ui \
+    masspass.ui
