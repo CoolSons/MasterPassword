@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "masspass.h"
 #include "mainwindow.h"
+#include <QtWidgets/QStackedLayout>
 
 namespace Ui {
 class stacker;
@@ -15,8 +16,11 @@ class stacker : public QMainWindow
 
 public:
     explicit stacker(QWidget *parent = 0);
-    ~stacker();
+    QStackedLayout *stack ;
 
+    ~stacker();
+public slots:
+    void showMW();
 private:
     Ui::stacker *ui;
 };

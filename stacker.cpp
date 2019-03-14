@@ -1,7 +1,6 @@
 #include "stacker.h"
 #include "ui_stacker.h"
 #include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QStackedLayout>
 #include <QtWidgets/QListWidget>
 
 stacker::stacker(QWidget *parent) :
@@ -12,7 +11,7 @@ stacker::stacker(QWidget *parent) :
 
     widget->setLayout(layout);
 
-    QStackedLayout *stack = new QStackedLayout;
+    stack = new QStackedLayout;
     layout->addLayout(stack);
 
    // layout->setStretch(1, 2);
@@ -23,9 +22,13 @@ stacker::stacker(QWidget *parent) :
     stack->addWidget(mas);
     stack->addWidget(mai);
     stack->setCurrentIndex(0);
-    connect(mas, SIGNAL(OkClicked()), this, SLOT(hide()));
+    connect(mas, SIGNAL(OkClicked()), this, SLOT(showMW()));
 }
 
 stacker::~stacker()
 {
+}
+void stacker::showMW()
+{
+    stack->setCurrentIndex(1);
 }
