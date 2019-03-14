@@ -13,7 +13,11 @@ class MassPass : public QWidget
 
 public:
     explicit MassPass(QWidget *parent = 0);
+
     ~MassPass();
+int GetX();
+int GetY();
+QRect GetGeo();
 
 private slots:
     void on_pushButton_clicked();

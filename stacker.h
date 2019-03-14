@@ -17,6 +17,7 @@ class stacker : public QMainWindow
 public:
     explicit stacker(QWidget *parent = 0);
     QStackedLayout *stack ;
+    QWidget *widget;
 
     ~stacker();
 public slots:

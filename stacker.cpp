@@ -4,24 +4,28 @@
 #include <QtWidgets/QListWidget>
 
 stacker::stacker(QWidget *parent) :
-    QMainWindow(parent)
+    QMainWindow(parent), ui(new Ui::stacker)
 {
-    QWidget *widget = new QWidget;
+    ui->setupUi(this);
+    widget = new QWidget;
     QHBoxLayout *layout = new QHBoxLayout;
-
-    widget->setLayout(layout);
-
     stack = new QStackedLayout;
+    widget->setLayout(layout);
     layout->addLayout(stack);
+    layout->setStretch(1, 2);
 
-   // layout->setStretch(1, 2);
 
-    setCentralWidget(widget);
+   // this->setCentralWidget(widget);
+//    ui->centralwidget->setBaseSize(400,400);
+//    ui->centralwidget->resize(400,400);
     MassPass *mas = new MassPass;
     MainWindow *mai = new MainWindow;
     stack->addWidget(mas);
     stack->addWidget(mai);
     stack->setCurrentIndex(0);
+
+//    ui->centralwidget->setFixedHeight(mas->GetY());
+    this->setCentralWidget(widget);
     connect(mas, SIGNAL(OkClicked()), this, SLOT(showMW()));
 }
 

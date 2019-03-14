@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1197</width>
-    <height>720</height>
+    <width>1130</width>
+    <height>673</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,13 +21,16 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <widget class="QWidget" name="horizontalLayoutWidget_3">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>50</y>
+      <x>30</x>
+      <y>20</y>
       <width>901</width>
       <height>591</height>
      </rect>
@@ -39,6 +42,9 @@
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
           <widget class="QLineEdit" name="QLineedit">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="whatsThis">
             <string/>
            </property>
@@ -49,6 +55,9 @@
          </item>
          <item>
           <widget class="QPushButton" name="ButtonAddSite">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="text">
             <string>Add</string>
            </property>
@@ -56,6 +65,9 @@
          </item>
          <item>
           <widget class="QPushButton" name="ButtonDeleteSite">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="text">
             <string>Delete</string>
            </property>
@@ -64,7 +76,11 @@
         </layout>
        </item>
        <item>
-        <widget class="QListWidget" name="listWidget"/>
+        <widget class="QListWidget" name="listWidget">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -74,6 +90,9 @@
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
           <widget class="QPushButton" name="ButtonAddAcc">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="text">
             <string>Add</string>
            </property>
@@ -81,6 +100,9 @@
          </item>
          <item>
           <widget class="QPushButton" name="ButtonDeleteAcc">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="text">
             <string>Delete</string>
            </property>
@@ -90,6 +112,9 @@
        </item>
        <item>
         <widget class="QTableWidget" name="tableWidget">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="mouseTracking">
           <bool>false</bool>
          </property>

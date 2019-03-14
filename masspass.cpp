@@ -8,7 +8,18 @@ MassPass::MassPass(QWidget *parent) :
     ui->setupUi(this);
 
 }
-
+int MassPass::GetX()
+{
+    return ui->verticalLayout_2->geometry().width();
+}
+int MassPass::GetY()
+{
+    return ui->verticalLayout_2->geometry().height();
+}
+QRect MassPass::GetGeo()
+{
+    return ui->verticalLayout_2->geometry();
+}
 
 
 MassPass::~MassPass()

@@ -36,7 +36,8 @@ HEADERS += \
     caddaccount.h \
     cmodel.h \
     stacker.h \
-    masspass.h
+    masspass.h \
+    jsonfunctions.h
 
 FORMS += \
         mainwindow.ui \
