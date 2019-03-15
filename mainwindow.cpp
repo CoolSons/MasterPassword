@@ -19,6 +19,18 @@
         ui->tableWidget->verticalHeader()->setVisible(false);
         ui->QLineedit->selectAll();
     }
+    int MainWindow::GetW()
+    {
+        return ui->verticalLayout_2->geometry().width();
+    }
+    int MainWindow::GetH()
+    {
+        return ui->verticalLayout_2->geometry().height();
+    }
+    QRect MainWindow::GetGeo()
+    {
+        return ui->verticalLayout_2->geometry();
+    }
 
     void setAccountsToListWidget(Ui::MainWindow *ui)
     {

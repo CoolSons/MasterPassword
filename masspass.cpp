@@ -10,15 +10,15 @@ MassPass::MassPass(QWidget *parent) :
 }
 int MassPass::GetX()
 {
-    return ui->verticalLayout_2->geometry().width();
+    return ui->horizontalLayout->geometry().width();
 }
 int MassPass::GetY()
 {
-    return ui->verticalLayout_2->geometry().height();
+    return ui->horizontalLayout->geometry().height();
 }
 QRect MassPass::GetGeo()
 {
-    return ui->verticalLayout_2->geometry();
+    return ui->horizontalLayout->geometry();
 }
 
 
@@ -31,4 +31,14 @@ MassPass::~MassPass()
 void MassPass::on_pushButton_clicked()
 {
     emit OkClicked();
+}
+
+void MassPass::on_pushButton_2_clicked()
+{
+    emit CancelClicked();
+}
+
+void MassPass::on_pushButton_3_clicked()
+{
+    emit showClicked();
 }

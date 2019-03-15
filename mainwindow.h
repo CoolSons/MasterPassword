@@ -51,7 +51,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
+    int GetW();
+    int GetH();
+    QRect GetGeo();
 private slots:
     void on_listWidget_pressed(const QModelIndex &index);
 

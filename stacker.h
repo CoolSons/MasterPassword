@@ -18,10 +18,12 @@ public:
     explicit stacker(QWidget *parent = 0);
     QStackedLayout *stack ;
     QWidget *widget;
-
+    MassPass *mas ;
+    MainWindow *mai ;
     ~stacker();
 public slots:
     void showMW();
+    void setMwGeometry();
 private:
     Ui::stacker *ui;
 };
