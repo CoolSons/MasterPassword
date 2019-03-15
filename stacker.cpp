@@ -28,6 +28,7 @@ stacker::stacker(QWidget *parent) :
 
     this->setCentralWidget(widget);
     this->setGeometry(700,400, int(mas->GetX()+260), int(mas->GetY()+145));
+
     connect(mas, SIGNAL(OkClicked()), this, SLOT(showMW()));
     connect(mas, SIGNAL(CancelClicked()), this, SLOT(close()));
     connect(mas, SIGNAL(OkClicked()), this, SLOT(setMwGeometry()));
@@ -44,6 +45,6 @@ void stacker::showMW()
 
 void stacker::setMwGeometry()
 {
-    this->setGeometry(300,300, int(mas->GetX()+1260), int(mas->GetY()+1145));
+    this->setGeometry(500, 200, int(2*mai->GetW()+75), int(mai->GetH()+90));
     qWarning() <<  this->geometry().width() << " " << this->geometry().height();
 }
