@@ -37,7 +37,8 @@ HEADERS += \
     cmodel.h \
     stacker.h \
     masspass.h \
-    jsonfunctions.h
+    jsonfunctions.h \
+    sha512.h
 
 FORMS += \
         mainwindow.ui \

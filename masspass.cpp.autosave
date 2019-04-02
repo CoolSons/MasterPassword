@@ -2,7 +2,6 @@
 #include "masspass.h"
 #include "ui_masspass.h"
 #include <QPushButton>
-#include "sha512.h"
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -12,10 +11,9 @@ MassPass::MassPass(QWidget *parent) :
     ui(new Ui::MassPass)
 {
     ui->setupUi(this);
-    SHA256* yourInstanceName = new SHA256();
-    ui->lineEdit->setText(QString::fromStdString(yourInstanceName->hash("ABCDEFGHIJKLMN")));
-    QString a = ui->lineEdit->text();
-
+    
+    
+    
 }
 int MassPass::GetX()
 {

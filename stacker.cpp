@@ -30,8 +30,8 @@ stacker::stacker(QWidget *parent) :
     this->setGeometry(700,400, int(mas->GetX()+260), int(mas->GetY()+145));
 
     connect(mas, SIGNAL(OkClicked()), this, SLOT(showMW()));
-    connect(mas, SIGNAL(CancelClicked()), this, SLOT(close()));
     connect(mas, SIGNAL(OkClicked()), this, SLOT(setMwGeometry()));
+    connect(mas, SIGNAL(CancelClicked()), this, SLOT(close()));
 
   }
 
