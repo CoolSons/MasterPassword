@@ -1,7 +1,9 @@
 #ifndef SHA512_H
 #define SHA512_H
 
-
+//#define _GLIBCXX_USE_CXX11_ABI 0
+//SHA256* yourInstanceName = new SHA256();
+//QString::fromStdString(yourInstanceName->hash("ABCDEFGHIJKLMN"));
 
 
 #include <iostream>
